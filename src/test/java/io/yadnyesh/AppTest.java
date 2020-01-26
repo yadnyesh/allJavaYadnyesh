@@ -1,4 +1,4 @@
-package io.yadnyeshh;
+package io.yadnyesh;
 
 import static org.junit.Assert.assertTrue;
 

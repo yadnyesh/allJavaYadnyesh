@@ -1,9 +1,5 @@
-package io.yadnyeshh;
+package io.yadnyesh;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
