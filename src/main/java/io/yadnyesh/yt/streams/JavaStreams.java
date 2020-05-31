@@ -7,7 +7,6 @@ public class JavaStreams {
     public static void main(String[] args) {
         Stream.of("Bharat", "Sweta", "Yadnyesh", "Bindiya", "Varada")
                 .sorted()
-                .findFirst()
-                .ifPresent(System.out::print);
+                .forEach(System.out::println);
     }
 }
