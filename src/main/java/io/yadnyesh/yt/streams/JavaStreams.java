@@ -1,10 +1,17 @@
 package io.yadnyesh.yt.streams;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class JavaStreams {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<String> people = Arrays.asList("Al", "Ankit", "Noopur", "Payal", "Supriya", "Soma", "Sarika", "Hans", "Shivika", "Yogesh",
                           "Abhinandan", "Suresh", "Aditya", "Rakesh", "Shital");
         people.stream()
@@ -16,5 +23,18 @@ public class JavaStreams {
                 .map( x -> x * x)
                 .average()
                 .ifPresent(System.out::println);
+
+        Stream<String> rows = Files.lines(Paths.get("data.txt"));
+        Map<String, Integer> mapFromFileInput = new HashMap<>();
+        mapFromFileInput = rows
+                            .map(x -> x.split(","))
+                            .filter(x -> x.length ==3)
+                            .collect(Collectors.toMap(x -> x[0], x-> Integer.parseInt(x[1])));
+        rows.close();
+        for(String key: mapFromFileInput.keySet()) {
+            System.out.println(key + " --- " + mapFromFileInput.get(key));
+        }
+
+
     }
 }
