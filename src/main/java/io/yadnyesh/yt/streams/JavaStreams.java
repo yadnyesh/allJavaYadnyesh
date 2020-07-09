@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,8 +23,8 @@ public class JavaStreams {
                 .average()
                 .ifPresent(System.out::println);
 
-        Stream<String> rows = Files.lines(Paths.get("data.txt"));
-        Map<String, Integer> mapFromFileInput = new HashMap<>();
+        Stream<String> rows = Files.lines(Paths.get("/Users/y0j01bf/learning/allJavaYadnyesh/src/main/java/io/yadnyesh/yt/streams/data.txt"));
+        Map<String, Integer> mapFromFileInput;
         mapFromFileInput = rows
                             .map(x -> x.split(","))
                             .filter(x -> x.length ==3)

@@ -8,6 +8,7 @@ import static java.lang.Thread.sleep;
 public class Sample {
 
     public static int transform(int number) {
+        System.out.println("t : " + number + " -- " + Thread.currentThread());
         try {
             sleep(1000);
         } catch (InterruptedException e) {
@@ -21,6 +22,6 @@ public class Sample {
         integerList.stream()
                 .parallel()
                 .map(Sample::transform)
-                .forEach(e -> System.out.println(e + " " + Thread.currentThread().getName()));
+                .forEachOrdered(e -> System.out.println(e + " " + Thread.currentThread().getName()));
     }
 }
