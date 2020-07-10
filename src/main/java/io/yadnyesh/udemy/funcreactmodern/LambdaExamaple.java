@@ -16,5 +16,10 @@ public class LambdaExamaple {
         });
         t2.start();
 
+        Thread lambdaThread = new Thread(() -> System.out.println("Thread in Lambda. " + Thread.currentThread().getName()));
+        lambdaThread.start();
+
+
+
     }
 }
