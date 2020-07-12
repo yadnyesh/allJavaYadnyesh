@@ -16,5 +16,11 @@ public class LambdaExample {
         MathOperationReturn length = String::length;
         log.info("The length of String is: " + length.lengthOfString("Yadnyesh"));
 
+        MathOperationReturn strleng = s -> {
+          int l = s.length();
+          log.info("Multiline function length: " + l);
+            return l;
+        };
+
     }
 }
