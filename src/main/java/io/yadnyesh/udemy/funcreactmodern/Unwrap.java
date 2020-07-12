@@ -12,9 +12,9 @@ public class Unwrap {
         Optional<Integer> optionalInteger = Optional.of(a);
         Integer integerVal = optionalInteger.get();
         Optional<Integer> emptyOptional = Optional.empty();
-        Integer existingVal = optionalInteger.isPresent() ? optionalInteger.get() : 1000;
+        Integer existingVal = optionalInteger.orElse(1000);
         log.info("Exisiting Value: " + existingVal);
-        Integer val = emptyOptional.isPresent() ? emptyOptional.get() : 100;
+        Integer val = emptyOptional.orElse(200);
         log.info(" val is : " + val);
 
     }
