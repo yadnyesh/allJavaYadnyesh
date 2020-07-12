@@ -22,16 +22,16 @@ public class PracticePredicate {
         list.add("");
         list.add("WalmartLabs");
 
-        Predicate<String> predicate = s -> !s.isEmpty();
+        Predicate<String> predicate = s -> s.contains("ar") && !s.isEmpty();
 
         List<String> nonEmptyStringList = filterlist(list, predicate);
 
         log.info("The filtered list is: " + nonEmptyStringList);
     }
 
-    private static List<String> filterlist(List<String> listInput, Predicate predicate) {
-        List<String> list = new ArrayList<>();
-        for(String string : listInput) {
+    private static <T> List<T> filterlist(List<T> listInput, Predicate<T> predicate) {
+        List<T> list = new ArrayList<>();
+        for(T string : listInput) {
             if(predicate.test(string)) {
                 list.add(string);
             }
