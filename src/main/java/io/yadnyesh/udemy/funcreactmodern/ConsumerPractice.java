@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 public class ConsumerPractice {
     public static void main(String[] args) {
         List<Integer> integerList = List.of(34,56,57,48,25,65,53,12,13);
-        Consumer <Integer> consumer = e -> log.info(e.toString());
+        Consumer <Integer> consumer = System.out::println;
         consumer.accept(56);
         printElements(integerList, consumer);
     }
