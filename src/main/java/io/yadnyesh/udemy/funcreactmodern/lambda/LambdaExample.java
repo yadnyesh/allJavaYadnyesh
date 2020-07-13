@@ -1,4 +1,4 @@
-package io.yadnyesh.udemy.funcreactmodern;
+package io.yadnyesh.udemy.funcreactmodern.lambda;
 
 import lombok.extern.slf4j.Slf4j;
 

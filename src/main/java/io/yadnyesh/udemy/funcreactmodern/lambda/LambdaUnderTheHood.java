@@ -1,4 +1,4 @@
-package io.yadnyesh.udemy.funcreactmodern;
+package io.yadnyesh.udemy.funcreactmodern.lambda;
 
 public class LambdaUnderTheHood {
     public static void main(String[] args) {
