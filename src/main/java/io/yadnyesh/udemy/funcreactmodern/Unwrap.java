@@ -10,7 +10,6 @@ public class Unwrap {
     public static void main(String[] args) {
         Integer a = 10;
         Optional<Integer> optionalInteger = Optional.of(a);
-        Integer integerVal = optionalInteger.get();
         Optional<Integer> emptyOptional = Optional.empty();
         Integer existingVal = optionalInteger.orElse(1000);
         log.info("Exisiting Value: " + existingVal);
