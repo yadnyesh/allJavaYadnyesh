@@ -13,5 +13,14 @@ public class LambdaExample {
         add.operation(10,3);
         subtract.operation(13, 10);
 
+        MathOperationReturn length = String::length;
+        log.info("The length of String is: " + length.lengthOfString("Yadnyesh"));
+
+        MathOperationReturn strleng = s -> {
+          int l = s.length();
+          log.info("Multiline function length: " + l);
+            return l;
+        };
+
     }
 }
