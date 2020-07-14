@@ -22,5 +22,7 @@ public class StrategyPattern {
         StockFilters.byPriceAbove(stockList, 80.00).forEach(System.out::println);
         System.out.println("------------------------------------------------------");
         System.out.println(StockFilters.filter(stockList, s -> s.getPrice() > 80.00));
+        System.out.println("------------------------------------------------------");
+        StockFilters.filter(stockList, s -> s.getSymbol().equals("AAPL")).forEach(System.out::println);
      }
 }
