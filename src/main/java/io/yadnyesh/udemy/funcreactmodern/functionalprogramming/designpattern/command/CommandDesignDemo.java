@@ -6,7 +6,7 @@ public class CommandDesignDemo {
         AirConditioner ac2 = new AirConditioner();
 
         ACAutomationRemote remote = new ACAutomationRemote();
-        remote.setCommand(() -> ac2.turnOn());
+        remote.setCommand(ac2::turnOn);
         remote.buttonPressed();
     }
 }
