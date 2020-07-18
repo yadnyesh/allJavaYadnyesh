@@ -2,6 +2,7 @@ package io.yadnyesh.yt.devdojo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.reactivestreams.Subscription;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -47,6 +48,41 @@ public class MonoTest {
 
         StepVerifier.create(mono)
                 .expectNext("Yadnyesh")
+                .verifyComplete();
+    }
+
+    @Test
+    public void monoSubscribeConsumerComplete(){
+        String name = "Yadnyesh";
+        Mono<String> mono = Mono.just(name)
+                .log()
+                .map(String::toUpperCase);
+        mono.subscribe(s -> log.info("Value: {}", s),
+                Throwable::printStackTrace,
+                () -> log.info("Process Completed"));
+
+        log.info("----------------------------------------");
+
+        StepVerifier.create(mono)
+                .expectNext("Yadnyesh".toUpperCase())
+                .verifyComplete();
+    }
+
+    @Test
+    public void monoSubscribeConsumerSubscription(){
+        String name = "Yadnyesh";
+        Mono<String> mono = Mono.just(name)
+                .log()
+                .map(String::toUpperCase);
+        mono.subscribe(s -> log.info("Value: {}", s),
+                Throwable::printStackTrace,
+                () -> log.info("Process Completed"),
+                subscription -> subscription.request(5));
+
+        log.info("----------------------------------------");
+
+        StepVerifier.create(mono)
+                .expectNext("Yadnyesh".toUpperCase())
                 .verifyComplete();
     }
 }
