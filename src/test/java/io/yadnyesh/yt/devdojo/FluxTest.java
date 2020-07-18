@@ -203,7 +203,8 @@ public class FluxTest {
         StepVerifier
                 .create(connectableFlux)
                 .then(connectableFlux::connect)
-                .expectNext(1,2,3,4,5,6,7,8,9,10)
+                .thenConsumeWhile(i -> i <= 5)
+                .expectNext(6,7,8,9,10)
                 .expectComplete()
                 .verify();
     }
