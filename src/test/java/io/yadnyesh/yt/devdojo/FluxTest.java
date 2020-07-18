@@ -39,4 +39,25 @@ public class FluxTest {
                 .expectNext(1,2,3,4,5)
                 .verifyComplete();
     }
+
+    @Test
+    public void FluxSubscriberFromError() {
+        Flux<Integer> flux = Flux.range(1,5)
+                .log()
+                .map(i -> {
+                    if( i == 4) {
+                        throw new IndexOutOfBoundsException("Induced index error");
+                    }
+                    return i;
+                });
+        flux.subscribe(i -> log.info("Number: {}", i), Throwable::printStackTrace,
+                () -> log.info("Done!"), subscription ->  subscription.request(3));
+
+        log.info("----------------------------------------");
+
+        StepVerifier.create(flux)
+                .expectNext(1,2,3)
+                .expectError(IndexOutOfBoundsException.class)
+                .verify();
+    }
 }
