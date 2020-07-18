@@ -3,6 +3,7 @@ package io.yadnyesh.yt.devdojo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 import java.util.List;
 
@@ -14,7 +15,11 @@ public class MonoTest {
         //List<String> stringList = List.of("Yadnyesh", "Bharat", "Juvekar");
         Mono<String> mono = Mono.just(name).log();
         mono.subscribe();
-        log.info("Mono {}", mono);
-        log.info("Project Setup Complete for Devdojo - Project Reactor");
+
+        log.info("----------------------------------------");
+
+        StepVerifier.create(mono)
+                .expectNext("Yadnyesh")
+                .verifyComplete();
     }
 }
