@@ -89,12 +89,13 @@ public class MonoTest {
     @Test
     public void monoDoOnMethods(){
         String name = "Yadnyesh";
-        Mono<String> mono = Mono.just(name)
+        Mono<Object> mono = Mono.just(name)
                 .log()
                 .map(String::toUpperCase)
                 .doOnSubscribe(subscription -> log.info("Subscribed"))
                 .doOnRequest(longNumber -> log.info("Request received, start doing something"))
                 .doOnNext(s -> log.info("Value is here. Executing doOnNext {}", s))
+                .flatMap(s -> Mono.empty())
                 .doOnNext(s -> log.info("Value is here. Executing doOnNext {}", s))
                 .doOnSuccess(s -> log.info("doOnSuccess executed"));
 
