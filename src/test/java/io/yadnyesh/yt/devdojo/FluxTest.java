@@ -2,6 +2,8 @@ package io.yadnyesh.yt.devdojo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
@@ -59,5 +61,49 @@ public class FluxTest {
                 .expectNext(1,2,3)
                 .expectError(IndexOutOfBoundsException.class)
                 .verify();
+    }
+
+    @Test
+    public void FluxSubscriberNumberUglyBackPressure() {
+        Flux<Integer> flux = Flux.range(1,10)
+                .log();
+
+        flux.subscribe(new Subscriber<Integer>() {
+
+            private int count = 0;
+            private Subscription subscription;
+            private int requestCount;
+
+            @Override
+            public void onSubscribe(Subscription subscription) {
+                this.subscription = subscription;
+                subscription.request(requestCount);
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                count++;
+                if(count >= requestCount) {
+                    count = 0;
+                    subscription.request(requestCount);
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+        log.info("----------------------------------------");
+
+        StepVerifier.create(flux)
+                .expectNext(1,2,3,4,5,6,7,8,9,10)
+                .verifyComplete();
     }
 }
