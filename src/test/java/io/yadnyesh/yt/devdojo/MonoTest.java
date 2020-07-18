@@ -22,4 +22,17 @@ public class MonoTest {
                 .expectNext("Yadnyesh")
                 .verifyComplete();
     }
+
+    @Test
+    public void monoSubscribeConsumer(){
+        String name = "Yadnyesh";
+        Mono<String> mono = Mono.just(name).log();
+        mono.subscribe(s -> log.info("Value: {}", s));
+
+        log.info("----------------------------------------");
+
+        StepVerifier.create(mono)
+                .expectNext("Yadnyesh")
+                .verifyComplete();
+    }
 }
