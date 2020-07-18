@@ -192,13 +192,6 @@ public class FluxTest {
                 .log()
                 .delayElements(Duration.ofMillis(100))
                 .publish();
-//        connectableFlux.connect();
-//        log.info("Thread sleeping for 300ms");
-//        Thread.sleep(300);
-//        connectableFlux.subscribe(i -> log.info("Sub1 {}", i));
-//        Thread.sleep(200);
-//        log.info("Thread sleep for 200ms");
-//        connectableFlux.subscribe(i -> log.info("Sub2 {}", i));
 
         StepVerifier
                 .create(connectableFlux)
