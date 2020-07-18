@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
+import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
@@ -68,7 +69,7 @@ public class FluxTest {
         Flux<Integer> flux = Flux.range(1,10)
                 .log();
 
-        flux.subscribe(new Subscriber<Integer>() {
+        flux.subscribe(new Subscriber<>() {
 
             private int count = 0;
             private Subscription subscription;
@@ -83,7 +84,7 @@ public class FluxTest {
             @Override
             public void onNext(Integer integer) {
                 count++;
-                if(count >= requestCount) {
+                if (count >= requestCount) {
                     count = 0;
                     subscription.request(requestCount);
                 }
@@ -97,6 +98,38 @@ public class FluxTest {
             @Override
             public void onComplete() {
 
+            }
+        });
+
+        log.info("----------------------------------------");
+
+        StepVerifier.create(flux)
+                .expectNext(1,2,3,4,5,6,7,8,9,10)
+                .verifyComplete();
+    }
+
+    @Test
+    public void FluxSubscriberNumberNotSoUglyBackPressure() {
+        Flux<Integer> flux = Flux.range(1,10)
+                .log();
+
+        flux.subscribe(new BaseSubscriber<>() {
+
+            private int count = 0;
+            private final int requestCount = 2;
+
+            @Override
+            protected void hookOnSubscribe(Subscription subscription) {
+                request(requestCount);
+            }
+
+            @Override
+            protected void hookOnNext(Integer value) {
+                count++;
+                if (count >= requestCount) {
+                    count = 0;
+                    request(requestCount);
+                }
             }
         });
 
