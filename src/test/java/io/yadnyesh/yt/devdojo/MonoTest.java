@@ -104,9 +104,17 @@ public class MonoTest {
                 () -> log.info("Process Completed"));
 
         log.info("----------------------------------------");
+    }
 
-//        StepVerifier.create(mono)
-//                .expectNext("Yadnyesh".toUpperCase())
-//                .verifyComplete();
+    @Test
+    public void monoDoOnError(){
+
+        Mono<Object> error = Mono.error(new IllegalArgumentException("Illegal Argument Exception"))
+                .doOnError(e -> MonoTest.log.error("Error Message {}", e.getMessage()))
+                .log();
+        StepVerifier.create(error)
+                .expectError(IllegalArgumentException.class)
+                .verify();
+
     }
 }
