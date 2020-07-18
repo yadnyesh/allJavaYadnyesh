@@ -14,4 +14,13 @@ public class FluxTest {
                 .expectNext("FirstName", "LastName", "DevDojo", "Academy")
                 .verifyComplete();
     }
+
+    @Test
+    public void FluxSubscriberNumbers() {
+        Flux<Integer> flux = Flux.range(1,5)
+                .log();
+        StepVerifier.create(flux)
+                .expectNext(1,2,3,4,5)
+                .verifyComplete();
+    }
 }
