@@ -229,4 +229,22 @@ public class Operators {
                 .expectComplete()
                 .verify();
     }
+
+    @Test
+    public void flatMapOperator() throws Exception {
+        Flux<String> flux1 = Flux.just("a","b");
+        Flux<String> mapFlux = flux1.map(String::toUpperCase)
+                .flatMap(this::findByName)
+                .log();
+        mapFlux.subscribe(o -> log.info(o.toString()));
+        StepVerifier
+                .create(mapFlux)
+                .expectSubscription()
+                .expectNext("nameA1","nameA2","nameB1","nameB2")
+                .verifyComplete();
+    }
+
+    public Flux<String> findByName(String name) {
+        return name.equals("A")? Flux.just("nameA1", "nameA2"): Flux.just("nameB1", "nameB2");
+    }
 }
