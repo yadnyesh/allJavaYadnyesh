@@ -5,8 +5,6 @@ import org.junit.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.util.List;
-
 @Slf4j
 public class MonoTest {
     @Test
