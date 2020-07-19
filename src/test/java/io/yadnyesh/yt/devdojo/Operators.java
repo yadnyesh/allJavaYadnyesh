@@ -201,4 +201,17 @@ public class Operators {
                 .verify();
     }
 
+    @Test
+    public void mergeOperator() {
+        Flux<String> flux1 = Flux.just("a", "b");
+        Flux<String> flux2 = Flux.just("c", "d");
+        Flux<String> mergeFlux = Flux.merge(flux1, flux2).log();
+        mergeFlux.subscribe(log::info);
+
+        StepVerifier.create(mergeFlux)
+                .expectSubscription()
+                .expectNext("a","b","c","d")
+                .expectComplete()
+                .verify();
+    }
 }
