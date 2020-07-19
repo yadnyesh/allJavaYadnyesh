@@ -134,8 +134,8 @@ public class Operators {
         StepVerifier.create(flux)
                 .expectSubscription()
                 .expectNext("not empty anymore")
-                .expectComplete()
-                .verify();
+                //.expectComplete()
+                .verifyComplete();
 
     }
 
