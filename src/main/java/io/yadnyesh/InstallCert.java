@@ -29,8 +29,7 @@ package io.yadnyesh;
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-/**
+
  * http://blogs.sun.com/andreas/resource/InstallCert.java
  * Use:
  * java InstallCert hostname
@@ -66,13 +65,14 @@ public class InstallCert {
             return;
         }
 
-        File file = new File("jssecacerts");
-        if (file.isFile() == false) {
+        String jssecacerts = "jssecacerts";
+        File file = new File(jssecacerts);
+        if (!file.isFile()) {
             char SEP = File.separatorChar;
             File dir = new File(System.getProperty("java.home") + SEP
                     + "lib" + SEP + "security");
-            file = new File(dir, "jssecacerts");
-            if (file.isFile() == false) {
+            file = new File(dir, jssecacerts);
+            if (!file.isFile()) {
                 file = new File(dir, "cacerts");
             }
         }
@@ -145,7 +145,7 @@ public class InstallCert {
         String alias = host + "-" + (k + 1);
         ks.setCertificateEntry(alias, cert);
 
-        OutputStream out = new FileOutputStream("jssecacerts");
+        OutputStream out = new FileOutputStream(jssecacerts);
         ks.store(out, passphrase);
         out.close();
 
@@ -184,7 +184,7 @@ public class InstallCert {
         }
 
         public void checkClientTrusted(X509Certificate[] chain, String authType)
-                throws CertificateException {
+                throws RuntimeException {
             throw new UnsupportedOperationException();
         }
 
