@@ -170,6 +170,20 @@ public class Operators {
                 .verify();
     }
 
+    @Test
+    public void concatWithOperator() {
+        Flux<String> flux1 = Flux.just("a", "b");
+        Flux<String> flux2 = Flux.just("c", "d");
+
+        Flux<String> concatWithFlux = flux1.concatWith(flux2).log();
+
+        StepVerifier.create(concatWithFlux)
+                .expectSubscription()
+                .expectNext("a","b","c","d")
+                .expectComplete()
+                .verify();
+    }
+
 
     private Flux<Object> emptyFlux() {
         return Flux.empty();
