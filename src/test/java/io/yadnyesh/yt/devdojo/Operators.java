@@ -1,5 +1,6 @@
 package io.yadnyesh.yt.devdojo;
 
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -7,7 +8,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
+import reactor.util.function.Tuple3;
 
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -145,13 +148,11 @@ public class Operators {
     }
 
     @Test
-    public void deferOperator() throws Exception {
+    public void deferOperator() {
         Mono<Long> just = Mono.just(System.currentTimeMillis());
         Mono<Long> defer = Mono.defer(() -> Mono.just(System.currentTimeMillis()));
         defer.subscribe(l -> log.info("time {}", l));
-        Thread.sleep(100);
         defer.subscribe(l -> log.info("time {}", l));
-        Thread.sleep(100);
         defer.subscribe(l -> log.info("time {}", l));
         defer.subscribe(l -> log.info("time {}", l));
 
@@ -215,4 +216,55 @@ public class Operators {
                 .expectComplete()
                 .verify();
     }
+
+    @Test
+    public void mergeSequenceOperator() {
+        Flux<String> flux1 = Flux.just("a", "b").delayElements(Duration.ofMillis(200));
+        Flux<String> flux2 = Flux.just("c", "d");
+        Flux<String> mergeFlux = Flux.mergeSequential(flux1, flux2, flux1).log();
+        mergeFlux.subscribe(log::info);
+
+        StepVerifier.create(mergeFlux)
+                .expectSubscription()
+                .expectNext("a","b","c","d","a","b")
+                .expectComplete()
+                .verify();
+    }
+
+    @Test
+    public void flatMapOperator() {
+        Flux<String> flux1 = Flux.just("a","b");
+        Flux<String> mapFlux = flux1.map(String::toUpperCase)
+                .flatMap(this::findByName)
+                .log();
+        mapFlux.subscribe(log::info);
+        StepVerifier
+                .create(mapFlux)
+                .expectSubscription()
+                .expectNext("nameA1","nameA2","nameB1","nameB2")
+                .verifyComplete();
+    }
+
+    public Flux<String> findByName(String name) {
+        return name.equals("A")? Flux.just("nameA1", "nameA2"): Flux.just("nameB1", "nameB2");
+    }
+
+    @Test
+    public void zipOperator() {
+        Flux<String> titleFlux = Flux.just("Grand Blue", "Baki");
+        Flux<String> studioFlux = Flux.just("Zero-G", "TM Entertainment");
+        Flux<Integer> episodesFlux = Flux.just(12,24);
+        //Flux<Tuple3<String, String, Integer>> tuple3Flux = Flux.zip(titleFlux, studioFlux, episodesFlux);
+        Flux<Anime> animeFlux = Flux.zip(titleFlux, studioFlux, episodesFlux)
+                .flatMap(tuple -> Flux.just(new Anime(tuple.getT1(), tuple.getT2(), tuple.getT3())));
+        animeFlux.subscribe(a -> log.info(a.toString()));
+
+        StepVerifier.create(animeFlux)
+                .expectSubscription()
+                .expectNext(
+                        new Anime("Grand Blue", "Zero-G", 12),
+                        new Anime("Baki", "TM Entertainment", 24)
+                ).verifyComplete();
+    }
+
 }
