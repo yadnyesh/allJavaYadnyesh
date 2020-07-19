@@ -3,7 +3,6 @@ package io.yadnyesh.yt.devdojo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
-import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
@@ -34,12 +33,13 @@ public class Operators {
                 .map(i -> {
                     log.info("Map 1 - Number {} on Thread {}", i, Thread.currentThread().getName());
                     return i;
-                }).subscribeOn(Schedulers.boundedElastic())
+                }).publishOn(Schedulers.boundedElastic())
                 .map(i -> {
                     log.info("Map 2 - Number {} on Thread {}", i, Thread.currentThread().getName());
                     return i;
                 });
-
+        flux.subscribe();
+        flux.subscribe();
         StepVerifier.create(flux)
                 .expectSubscription()
                 .expectNext(1,2,3,4)
