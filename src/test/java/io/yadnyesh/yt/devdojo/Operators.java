@@ -110,12 +110,11 @@ public class Operators {
     }
 
     @Test
-    public void subscribeOnIO() throws InterruptedException {
+    public void subscribeOnIO() {
         Mono<List<String>> list = Mono.fromCallable(() -> Files.readAllLines(Path.of("text-file")))
                 .log()
                 .subscribeOn(Schedulers.boundedElastic());
         list.subscribe(s -> log.info("{}", s));
-        Thread.sleep(20000);
 
         StepVerifier.create(list)
                 .expectSubscription()
