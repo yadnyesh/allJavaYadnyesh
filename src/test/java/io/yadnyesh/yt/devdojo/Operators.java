@@ -139,6 +139,20 @@ public class Operators {
 
     }
 
+    @Test
+    public void deferOperator() throws Exception {
+        Mono<Long> just = Mono.just(System.currentTimeMillis());
+        Mono<Long> defer = Mono.defer(() -> Mono.just(System.currentTimeMillis()));
+        defer.subscribe(l -> log.info("time {}", l));
+        Thread.sleep(100);
+        defer.subscribe(l -> log.info("time {}", l));
+        Thread.sleep(100);
+        defer.subscribe(l -> log.info("time {}", l));
+        defer.subscribe(l -> log.info("time {}", l));
+    }
+
+
+
     private Flux<Object> emptyFlux() {
         return Flux.empty();
     }
