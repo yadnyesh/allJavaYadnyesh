@@ -46,8 +46,10 @@ public class MonoTest {
         log.info("----------------------------------------");
 
         StepVerifier.create(mono)
-                .expectNext("Yadnyesh")
-                .verifyComplete();
+//                .expectNext("Yadnyesh")
+//                .verifyComplete();
+                .expectError(RuntimeException.class)
+                .verify();
     }
 
     @Test
