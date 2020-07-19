@@ -124,4 +124,22 @@ public class Operators {
                     return true;
                 }).verifyComplete();
     }
+
+    @Test
+    public void switchIfEmptyOperator() {
+        Flux<Object> flux = emptyFlux()
+                .switchIfEmpty(Flux.just("not empty anymore"))
+                .log();
+
+        StepVerifier.create(flux)
+                .expectSubscription()
+                .expectNext("not empty anymore")
+                .expectComplete()
+                .verify();
+
+    }
+
+    private Flux<Object> emptyFlux() {
+        return Flux.empty();
+    }
 }
