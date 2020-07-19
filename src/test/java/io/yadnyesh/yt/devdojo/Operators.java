@@ -139,6 +139,9 @@ public class Operators {
                 .verifyComplete();
 
     }
+    private Flux<Object> emptyFlux() {
+        return Flux.empty();
+    }
 
     @Test
     public void deferOperator() throws Exception {
@@ -184,8 +187,18 @@ public class Operators {
                 .verify();
     }
 
+    @Test
+    public void combineLastOperator() {
+        Flux<String> flux1 = Flux.just("a", "b");
+        Flux<String> flux2 = Flux.just("c", "d");
 
-    private Flux<Object> emptyFlux() {
-        return Flux.empty();
+        Flux<String> combineLastFlux = Flux.combineLatest(flux1, flux2, (s1, s2) -> s1.toUpperCase() + " - " + s2.toUpperCase())
+                .log();
+        StepVerifier.create(combineLastFlux)
+                .expectSubscription()
+                .expectNext("B - C","B - D")
+                .expectComplete()
+                .verify();
     }
+
 }
