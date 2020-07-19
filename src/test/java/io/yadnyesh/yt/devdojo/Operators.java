@@ -11,6 +11,7 @@ import reactor.test.StepVerifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 public class Operators {
@@ -149,6 +150,10 @@ public class Operators {
         Thread.sleep(100);
         defer.subscribe(l -> log.info("time {}", l));
         defer.subscribe(l -> log.info("time {}", l));
+
+        AtomicLong atomicLong = new AtomicLong();
+        defer.subscribe(atomicLong::set);
+        Assertions.assertTrue(atomicLong.get()>0);
     }
 
 
