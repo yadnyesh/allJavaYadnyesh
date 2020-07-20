@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class StreamsIntro {
@@ -23,5 +25,11 @@ public class StreamsIntro {
         }
     }
     log.info(popularHorrorBooks.toString());
+
+      Set<Book> horrorBooks = books.stream().filter(book ->
+          book.getRating() > 3 && book.getGenre().equalsIgnoreCase("Horror")
+      ).collect(Collectors.toSet());
+      log.info("Stream Processing: {}", horrorBooks.toString());
+
   }
 }
