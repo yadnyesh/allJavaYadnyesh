@@ -20,7 +20,7 @@ public class MapOperation {
       books.add(new Book("H4", "A4", "Thriller",1));
 
       books.stream()
-              .map(e -> e.getName())
-              .forEach(e -> log.info(e));
+              .map(Book::getName)
+              .forEach(log::info);
   }
 }
