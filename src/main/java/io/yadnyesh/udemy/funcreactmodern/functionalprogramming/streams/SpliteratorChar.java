@@ -21,5 +21,6 @@ public class SpliteratorChar {
       int bits = spliterator.characteristics();
       log.info(String.valueOf(bits));
 
+
   }
 }
