@@ -24,9 +24,6 @@ public class CollectorsInAction {
           Spliterator<Employee> employeeSpliterator = new EmployeeSpliterator(wordSpliterator);
           Stream<Employee> employeeStream = StreamSupport.stream(employeeSpliterator, false);
           List<Employee> employeeList = employeeStream.collect(Collectors.toList());
-//          employeeList.forEach(employee -> log.info(employee.getName()));
-//          employeeList.stream().map(Employee::getDesignation)
-//                  .collect(Collectors.toSet()).forEach(log::info);
 
           TreeSet<Employee> employeesSorted = new TreeSet<>(employeeList);
           employeesSorted.stream().forEach(e -> log.info(e.toString()));
