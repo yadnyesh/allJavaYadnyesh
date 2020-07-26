@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -22,11 +23,10 @@ public class CollectorsInAction {
           Stream<Employee> employeeStream = StreamSupport.stream(employeeSpliterator, false);
           List<Employee> employeeList = employeeStream.collect(Collectors.toList());
 
-          Map<String, Long> groupByDesignation = employeeList.stream().collect(
-                  Collectors.groupingBy(Employee::getDesignation, Collectors.counting())
+          Map<String, Double> groupByDesignation = employeeList.stream().collect(
+                  Collectors.groupingBy(Employee::getDesignation, Collectors.summingDouble(e -> e.getSalary()))
           );
           log.info(groupByDesignation.toString());
-
       } catch (IOException e) {
           log.error(e.getMessage());
       }
