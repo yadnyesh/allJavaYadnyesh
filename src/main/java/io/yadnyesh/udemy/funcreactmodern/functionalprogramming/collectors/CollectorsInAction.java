@@ -22,8 +22,8 @@ public class CollectorsInAction {
           Stream<Employee> employeeStream = StreamSupport.stream(employeeSpliterator, false);
           List<Employee> employeeList = employeeStream.collect(Collectors.toList());
 
-          Map<String, Long> groupByDesignation = employeeList.stream().collect(
-                  Collectors.groupingBy(Employee::getDesignation, Collectors.counting())
+          Map<String, Double> groupByDesignation = employeeList.stream().collect(
+                  Collectors.groupingBy(Employee::getDesignation, Collectors.summingDouble(e -> e.getSalary()))
           );
           log.info(groupByDesignation.toString());
 
