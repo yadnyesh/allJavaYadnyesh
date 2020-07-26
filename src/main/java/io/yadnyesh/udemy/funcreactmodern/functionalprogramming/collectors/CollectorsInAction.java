@@ -26,7 +26,7 @@ public class CollectorsInAction {
           List<Employee> employeeList = employeeStream.collect(Collectors.toList());
 
           TreeSet<Employee> employeesSorted = new TreeSet<>(employeeList);
-          employeesSorted.stream().forEach(e -> log.info(e.toString()));
+          employeesSorted.forEach(e -> log.info(e.toString()));
 
       } catch (IOException e) {
           log.error(e.getMessage());
