@@ -22,10 +22,11 @@ public class CollectorsInAction {
           Spliterator<String> wordSpliterator = words.spliterator();
           Spliterator<Employee> employeeSpliterator = new EmployeeSpliterator(wordSpliterator);
           Stream<Employee> employeeStream = StreamSupport.stream(employeeSpliterator, false);
-          List<String> employeeNames = employeeStream
-                  .map(Employee::getName)
-                  .collect(Collectors.toList());
-          employeeNames.forEach(log::info);
+          List<Employee> employeeList = employeeStream.collect(Collectors.toList());
+          employeeList.forEach(employee -> log.info(employee.getName()));
+          employeeList.stream().map(Employee::getDesignation)
+                  .collect(Collectors.toSet()).forEach(log::info);
+
       } catch (IOException e) {
           log.error(e.getMessage());
       }
