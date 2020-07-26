@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Spliterator;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -27,6 +24,9 @@ public class CollectorsInAction {
 
           TreeSet<Employee> employeesSorted = new TreeSet<>(employeeList);
           employeesSorted.forEach(e -> log.info(e.toString()));
+
+          Map<Integer, String> getNameById = employeesSorted.stream().collect(Collectors.toMap(e -> e.getId(), e -> e.getName()));
+          log.info(getNameById.toString());
 
       } catch (IOException e) {
           log.error(e.getMessage());
