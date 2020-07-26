@@ -28,6 +28,9 @@ public class CollectorsInAction {
           Map<Integer, String> getNameById = employeesSorted.stream().collect(Collectors.toMap(e -> e.getId(), e -> e.getName()));
           log.info(getNameById.toString());
 
+          Map<Boolean, List<Employee>> mapByGender = employeeList.stream().collect(Collectors.partitioningBy(e -> e.getGender() == 'M'));
+          log.info(mapByGender.toString());
+
       } catch (IOException e) {
           log.error(e.getMessage());
       }
