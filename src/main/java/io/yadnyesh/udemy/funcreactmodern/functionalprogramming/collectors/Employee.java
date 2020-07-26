@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Employee {
+public class Employee implements Comparable<Employee>{
     private int id;
     private String name;
     private char gender;
@@ -21,4 +21,8 @@ public class Employee {
     private Date joiningDate;
     private Double salary;
 
+    @Override
+    public int compareTo(Employee o) {
+        return Integer.compare(this.id, o.id);
+    }
 }

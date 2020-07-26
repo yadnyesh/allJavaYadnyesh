@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Spliterator;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -26,6 +27,8 @@ public class CollectorsInAction {
           employeeList.forEach(employee -> log.info(employee.getName()));
           employeeList.stream().map(Employee::getDesignation)
                   .collect(Collectors.toSet()).forEach(log::info);
+
+          TreeSet<Employee> employeesSorted = new TreeSet<>(employeeList);
 
       } catch (IOException e) {
           log.error(e.getMessage());
