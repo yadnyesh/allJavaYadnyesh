@@ -27,9 +27,6 @@ public class CollectorsInAction {
                   Collectors.groupingBy(Employee::getDesignation, Collectors.summingDouble(e -> e.getSalary()))
           );
           log.info(groupByDesignation.toString());
-
-          Function.identity()
-
       } catch (IOException e) {
           log.error(e.getMessage());
       }
