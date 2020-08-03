@@ -15,5 +15,9 @@ public class SetFuntionalOperations {
       set.stream()
               .filter(e -> e%2 ==0)
               .forEach(e -> log.info(e.toString()));
+      int sum = set.stream()
+              .mapToInt(e -> e)
+              .sum();
+      log.info("Sum of the numbers is {}", sum);
   }
 }
