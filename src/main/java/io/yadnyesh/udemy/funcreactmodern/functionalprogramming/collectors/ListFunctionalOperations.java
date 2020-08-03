@@ -3,7 +3,6 @@ package io.yadnyesh.udemy.funcreactmodern.functionalprogramming.collectors;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -21,5 +20,6 @@ public class ListFunctionalOperations {
       movies.forEach(e -> log.info(e.toString()));
       movies.sort((o1, o2) -> o2.getReleaseYear() - o1.getReleaseYear());
       movies.forEach(e -> log.info("After Sorting: {}", e.toString()));
+      movies.stream().map(m -> m.getName()).forEach(log::info);
   }
 }
