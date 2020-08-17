@@ -18,6 +18,9 @@ public class MapFunctionalOperations {
         log.info(entry.getKey() + " --- " + entry.getValue());
       }
       contacts.forEach((k,v) -> log.info(k + " **** " + v));
+      contacts.entrySet().stream()
+              .filter(contact -> contact.getValue().equalsIgnoreCase("John"))
+              .forEach(c -> log.info(c.toString()));
 
   }
 }
