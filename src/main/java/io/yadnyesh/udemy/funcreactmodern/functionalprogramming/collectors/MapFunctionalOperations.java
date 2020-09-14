@@ -10,7 +10,6 @@ import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Log4j
 public class MapFunctionalOperations {
   public static void main(String[] args) {
       Map<String, String> contacts = new HashMap<>();
