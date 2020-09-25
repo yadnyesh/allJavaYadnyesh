@@ -7,7 +7,6 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.internal.operators.observable.ObservableCreate;
-import lombok.extern.slf4j.Slf4j;
 
 
 public class ObservableAndObserver {
