@@ -11,21 +11,17 @@ import io.reactivex.rxjava3.internal.operators.observable.ObservableCreate;
 
 public class ObservableAndObserver {
     public static void main(String[] args) {
-        Observable<Integer> source = new ObservableCreate<Integer>(new ObservableOnSubscribe<Integer>() {
-
-            public void subscribe(@NonNull ObservableEmitter<Integer> emitter) throws Throwable {
-                try {
-                    emitter.onNext(10);
-                    emitter.onNext(11);
-                    emitter.onComplete();
-                } catch (Throwable t) {
-                    emitter.onError(t);
-                }
+        Observable<Integer> source = new ObservableCreate<>(emitter -> {
+            try {
+                emitter.onNext(10);
+                emitter.onNext(11);
+                emitter.onComplete();
+            } catch (Throwable t) {
+                emitter.onError(t);
             }
-
         });
 
-        Observer<Integer> observer = new Observer<Integer>() {
+        Observer<Integer> observer = new Observer<>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 System.out.println("Subscribed");
