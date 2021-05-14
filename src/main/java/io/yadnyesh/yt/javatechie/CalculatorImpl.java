@@ -6,8 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 public class CalculatorImpl {
 
   public static void main(String[] args) {
-    Calculator calculator = () -> log.info("Switching on the calc...");
-    calculator.switchOn();
+    Calculator calculator = (a,b) -> log.info("Adding numbers on the calc..." + (a+b));
+    calculator.switchOn(2,3);
+
   }
 
 }
