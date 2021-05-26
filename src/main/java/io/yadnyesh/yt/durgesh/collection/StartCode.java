@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Vector;
 
 @Slf4j
 public class StartCode {
@@ -22,5 +23,9 @@ public class StartCode {
       linkedList.add(100);
       linkedList.add(2);
       log.info(linkedList.toString());
+
+      Vector<String> vector = new Vector<>();
+      vector.addAll(names);
+      log.info(names.toString());
   }
 }
