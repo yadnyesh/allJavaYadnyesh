@@ -22,5 +22,6 @@ public class TraverseExample {
         String next = iterator.next();
         log.info(next);
       }
+      names.forEach(e -> log.info("Lambda: " + e));
   }
 }
