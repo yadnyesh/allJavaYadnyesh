@@ -7,11 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Main {
   public static void main(String[] args) {
-        Thread myThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                log.info("Run...");
-            }
-        });
+        Thread myThread = new Thread(Main::runIT);
+  }
+
+  public static void runIT() {
+      log.info("Run...");
   }
 }
