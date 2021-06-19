@@ -10,9 +10,15 @@ public class SomeMoreObservables {
   public static void main(String[] args) {
       createColdObservable();
       createHotAndColdObservable();
-
+      throwException();
 
   }
+
+    private static void throwException() {
+      Observable observable = Observable.error(new Exception("Exception in Observable"));
+      observable.subscribe(System.out::println, error -> System.out.println("An Error 1: " + error.hashCode()));
+      observable.subscribe(System.out::println, error -> System.out.println("An Error 2: " + error.hashCode()));
+    }
 
     private static void createHotAndColdObservable() {
         ConnectableObservable observable = Observable.just(1,2,3,4,5).publish();
