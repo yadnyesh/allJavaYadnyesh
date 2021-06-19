@@ -1,6 +1,9 @@
 package io.yadnyesh.yt.mithu.rxjava;
 
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -9,9 +12,35 @@ import java.util.List;
 @Slf4j
 public class Main {
   public static void main(String[] args) {
-       createObservableWithJust();
-       createObservableWithIterable();
-       createObservableUsingCreate();
+//       createObservableWithJust();
+//       createObservableWithIterable();
+//       createObservableUsingCreate();
+       Observable<Integer> integerObservable = Observable.just(1,2,3,4,5);
+
+    Observer<Integer> observer = new Observer<Integer>() {
+      @Override
+      public void onSubscribe(@NonNull Disposable d) {
+
+      }
+
+      @Override
+      public void onNext(@NonNull Integer integer) {
+          log.info(integer.toString());
+      }
+
+      @Override
+      public void onError(@NonNull Throwable e) {
+          log.info(e.getLocalizedMessage().toString());
+      }
+
+      @Override
+      public void onComplete() {
+          log.info("Completed");
+      }
+    };
+
+    integerObservable.subscribe(observer);
+
   }
 
     private static void createObservableUsingCreate() {
