@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class ImperativeMain {
@@ -24,7 +25,13 @@ public class ImperativeMain {
               females.add(person);
           }
       }
-      log.info(String.valueOf(females.size()));
+      log.info("Imperative approach: " + females.size());
+
+      log.info("Declarative approach below -- ");
+      people.stream()
+              .filter(person -> Gender.FEMALE.equals(person.gender))
+              .collect(Collectors.toList()).forEach(e -> log.info(e.toString()));
+
   }
 
     private static class Person {
