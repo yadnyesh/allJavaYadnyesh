@@ -2,6 +2,7 @@ package io.yadnyesh.yt.amigoscode.javafunctionalprogramming;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @Slf4j
@@ -16,7 +17,7 @@ public class _Function {
 
         log.info(String.valueOf(addBy1ThenMultiplyBy10.apply(110)));
 
-
+        log.info(String.valueOf(incrementByOneAndThenMultipy.apply(2,3)));
 
     }
 
@@ -24,8 +25,8 @@ public class _Function {
 
     static Function<Integer,Integer> multiplyBy10Function = number -> number * 10;
 
-
-
-
+    static BiFunction<Integer, Integer, Integer> incrementByOneAndThenMultipy =
+            (number, multiplyBy)
+                    -> (number + 1) * multiplyBy;
 
 }
