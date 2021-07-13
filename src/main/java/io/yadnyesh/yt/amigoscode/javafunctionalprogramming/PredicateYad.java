@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 public class PredicateYad {
     public static void main(String[] args) {
         log.info(String.valueOf(isPhoneNumberValid("919980057410")));
-        log.info(String.valueOf(isPhoneNumberValidPredicate.test("91998005741")));
+        log.info(String.valueOf(isPhoneNumberValidPredicate.and(doesPhoneNumberContainsSeven).test(("919980057410"))));
     }
 
     static boolean isPhoneNumberValid(String phoneNumber) {
@@ -17,4 +17,7 @@ public class PredicateYad {
 
     static Predicate<String> isPhoneNumberValidPredicate = phoneNumber
             -> phoneNumber.startsWith("91") && phoneNumber.length() == 12;
+
+    static Predicate<String> doesPhoneNumberContainsSeven = phoneNumber
+            -> phoneNumber.contains("7");
 }
