@@ -6,7 +6,7 @@ public class First {
     public static void main(String[] args) {
         System.out.println("Test");
         Scanner scanner = new Scanner(System.in);
-        int firstnumber = scanner.nextInt();
-        System.out.println("Printing: " + firstnumber);
+        int firstNumber = scanner.nextInt();
+        System.out.println("Printing: " + firstNumber);
     }
 }
