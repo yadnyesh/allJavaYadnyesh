@@ -8,5 +8,6 @@ public class First {
         Scanner scanner = new Scanner(System.in);
         int firstNumber = scanner.nextInt();
         System.out.println("Printing: " + firstNumber);
+        System.out.println(Integer.toBinaryString(-5));
     }
 }
