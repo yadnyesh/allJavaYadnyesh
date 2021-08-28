@@ -2,14 +2,15 @@ package io.yadnyesh.udemy.abdbari;
 
 public class ArrayPractice {
     public static void main(String[] args) {
-        int anInt[] = new int[10];
-        int newInt[] = {2,4,6,8,10};
-        for(int i=0; i < newInt.length; i++) {
-            System.out.println(newInt[i]);
-        }
-        System.out.println("New For loop syntax");
-        for (int x: newInt) {
+        int a[] = {1,2,3,4,5};
+        ArrayPractice arrayPractice = new ArrayPractice();
+        arrayPractice.update(a);
+        for(int x: a){
             System.out.println(x);
         }
+    }
+
+    void update(int a[]) {
+        a[0] = 25;
     }
 }
