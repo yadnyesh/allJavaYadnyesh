@@ -6,9 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ThreadTest {
     public static void main(String[] args) throws Exception {
         MyThread2 t = new MyThread2("My Thread");
+        t.start();
         int count = 1;
         while (true) {
             log.info(count++ + " ThreadTest");
+            Thread.yield();
         }
     }
 }
