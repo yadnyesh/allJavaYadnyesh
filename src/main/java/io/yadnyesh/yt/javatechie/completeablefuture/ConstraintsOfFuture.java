@@ -10,13 +10,19 @@ import java.util.concurrent.*;
 public class ConstraintsOfFuture {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        Future<List<Integer>> listFuture = executorService.submit(() -> {
+        Future<List<Integer>> futureIntegerList = executorService.submit(() -> {
             log.info("Thread -> " + Thread.currentThread().getName());
             delay(1);
             return Arrays.asList(1,2,3,4);
         });
+        log.info("Looks like on the main thread  -> " + Thread.currentThread().getName());
 
-        List<Integer> integerList = listFuture.get();
+        //multiple Futures cannot be combined together
+        //Futures cannot be chained
+        //No exception handling
+
+
+        List<Integer> integerList = futureIntegerList.get();
         log.info(integerList.toString());
 
     }
