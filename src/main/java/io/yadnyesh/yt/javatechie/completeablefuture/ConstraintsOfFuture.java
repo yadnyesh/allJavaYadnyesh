@@ -25,6 +25,11 @@ public class ConstraintsOfFuture {
         List<Integer> integerList = futureIntegerList.get();
         log.info(integerList.toString());
 
+        CompletableFuture<String> completableFuture = new CompletableFuture<>();
+        completableFuture.get();
+        completableFuture.complete("default....");
+        log.info(completableFuture.get());
+
     }
 
     private static void delay(int min) {
