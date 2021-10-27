@@ -1,20 +1,34 @@
 package io.yadnyesh.udemy.abdbari.multithreading.assg;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter
 @Setter
-public class Customer {
-    Atm atm;
-    String name;
-    double amount;
+@AllArgsConstructor
+@NoArgsConstructor
+public class Customer extends Thread {
+    private Atm atm;
+    private String customerName;
+    private double amount;
 
     void useAtm() {
-        double bankBalance = atm.checkBalance(this.getName());
-        double withdrawCash = atm.withdrawCash(this.getName(), amount);
+        atm.checkBalance(this.getCustomerName());
+        atm.withdrawCash(this.getCustomerName(), this.getAmount());
+    }
+    public void run() {
+        useAtm();
+    }
 
+    public static void main(String[] args) {
+        Atm atm = new Atm();
+        Customer yadnyesh = new Customer(atm, "Yadnyesh", 100);
+        Customer bindiya = new Customer(atm, "Bindiya", 200);
+        yadnyesh.start();
+        bindiya.start();
     }
 }
