@@ -10,7 +10,9 @@ public class Main {
         thread.setName("New Worker Thread");
         log.info("Before starting thread: " + Thread.currentThread().getName());
         thread.start();
+        thread.setPriority(10);
         log.info("After starting thread: " + Thread.currentThread().getName());
+        log.info("Thread Priority: " + Thread.currentThread().getPriority());
         Thread.sleep(2000);
     }
 }
