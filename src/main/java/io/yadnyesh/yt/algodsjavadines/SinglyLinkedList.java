@@ -48,6 +48,9 @@ public class SinglyLinkedList {
     }
 
     private void printLengthOfLinkedList() {
+        if( head == null) {
+            System.out.println("The linked list is empty");
+        }
         ListNode current = head;
         int count = 0;
         while (current != null) {
