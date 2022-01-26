@@ -35,6 +35,7 @@ public class SinglyLinkedList {
         fourth.next = fifth;
 
         singlyLinkedList.printSLL();
+        singlyLinkedList.printLengthOfLinkedList();
     }
 
     public void printSLL() {
@@ -44,6 +45,16 @@ public class SinglyLinkedList {
             current = current.next;
         }
         log.info("Done printing LL");
+    }
+
+    private void printLengthOfLinkedList() {
+        ListNode current = head;
+        int count = 0;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        System.out.println("The length of linked list is: " + count);
     }
 
 
