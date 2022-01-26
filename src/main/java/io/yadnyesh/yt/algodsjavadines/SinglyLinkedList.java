@@ -36,7 +36,7 @@ public class SinglyLinkedList {
         fourth.next = fifth;
 
         singlyLinkedList.insertNodeAtBeginning(22);
-        singlyLinkedList.insertNodeAtBeginning(26);
+        singlyLinkedList.insertNodeAtEndOfLinkedList(26);
 
         singlyLinkedList.printSLL();
         singlyLinkedList.printLengthOfLinkedList();
@@ -68,6 +68,18 @@ public class SinglyLinkedList {
         ListNode newNode = new ListNode(value);
         newNode.next = head;
         head = newNode;
+    }
+
+    public void insertNodeAtEndOfLinkedList(int value) {
+        ListNode newNode = new ListNode(value);
+        if (head == null) {
+            head = newNode;
+        }
+        ListNode current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
     }
 
 }
