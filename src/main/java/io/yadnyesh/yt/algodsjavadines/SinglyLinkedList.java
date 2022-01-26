@@ -33,13 +33,16 @@ public class SinglyLinkedList {
         third.next = fourth;
         fourth.next = fifth;
 
-        ListNode current = singlyLinkedList.head;
+        singlyLinkedList.printSLL();
+    }
+
+    public void printSLL() {
+        ListNode current = head;
         while (current != null) {
             log.info(current.data + "--> ");
             current = current.next;
         }
         log.info("Done printing LL");
-
     }
 
 
