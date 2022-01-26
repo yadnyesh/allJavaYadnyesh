@@ -28,11 +28,15 @@ public class SinglyLinkedList {
         ListNode third = new ListNode(2);
         ListNode fourth = new ListNode(3);
         ListNode fifth = new ListNode(4);
+        ListNode atbeg = new ListNode(11);
 
         singlyLinkedList.head.next = second;
         second.next = third;
         third.next = fourth;
         fourth.next = fifth;
+
+        singlyLinkedList.insertNodeAtBeginning(22);
+        singlyLinkedList.insertNodeAtBeginning(26);
 
         singlyLinkedList.printSLL();
         singlyLinkedList.printLengthOfLinkedList();
@@ -60,5 +64,10 @@ public class SinglyLinkedList {
         System.out.println("The length of linked list is: " + count);
     }
 
+    public void insertNodeAtBeginning(int value) {
+        ListNode newNode = new ListNode(value);
+        newNode.next = head;
+        head = newNode;
+    }
 
 }
