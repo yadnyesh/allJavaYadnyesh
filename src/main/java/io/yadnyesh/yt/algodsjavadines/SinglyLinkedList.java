@@ -1,9 +1,11 @@
 package io.yadnyesh.yt.algodsjavadines;
 
+import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 
+@Slf4j
 public class SinglyLinkedList {
 
     private ListNode head;
@@ -24,10 +26,20 @@ public class SinglyLinkedList {
         ListNode second = new ListNode(1);
         ListNode third = new ListNode(2);
         ListNode fourth = new ListNode(3);
+        ListNode fifth = new ListNode(4);
 
         singlyLinkedList.head.next = second;
         second.next = third;
         third.next = fourth;
+        fourth.next = fifth;
+
+        ListNode current = singlyLinkedList.head;
+        while (current != null) {
+            log.info(current.data + "--> ");
+            current = current.next;
+        }
+        log.info("Done printing LL");
+
     }
 
 
