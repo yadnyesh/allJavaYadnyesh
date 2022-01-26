@@ -15,6 +15,7 @@ public class SinglyLinkedList {
         private ListNode next;
 
         public ListNode(int data) {
+            System.out.println("Const of inner class");
             this.data = data;
             this.next = null;
         }
