@@ -18,9 +18,15 @@ public class Recursion1 {
         }
     }
 
+    public int fibonacci(int n) {
+        if(n <= 1)
+            return n;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
     public static void main(String[] args) {
         Recursion1 recursion1 = new Recursion1();
         recursion1.foo(3);
-        System.out.println("Factorial is: " + recursion1.factorial(5));
+        System.out.println("Factorial is: " + recursion1.fibonacci(5));
     }
 }
