@@ -70,6 +70,12 @@ public class SinglyLinkedList {
         head = newNode;
     }
 
+    public void insertNodeAtGivenPosition(int position) {
+        ListNode newNode = new ListNode(3);
+        newNode.next = head;
+        head = newNode;
+    }
+
     public void insertNodeAtEndOfLinkedList(int value) {
         ListNode newNode = new ListNode(value);
         if (head == null) {
