@@ -17,6 +17,4 @@ public class PowerOfTwo {
         else
             return 2 * powerOfTwo(raiseTwoTo - 1);
     }
-
-
 }
