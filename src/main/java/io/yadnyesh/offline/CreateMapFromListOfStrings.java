@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class CreateMapFromListOfStrings {
     public static void main(String[] args) {
         List<String> stringList = Arrays.asList("one", "three", "two", "seven", "ten","eleven", "four");
-        Map<Integer, String> mapFromStringList = stringList.stream().collect(Collectors.toMap(a -> 1, Function.identity()));
+        Map<Double, String> mapFromStringList = stringList.stream().collect(Collectors.toMap(a -> (Math.random()*100000), Function.identity()));
         System.out.println(mapFromStringList.toString());
     }
 }
