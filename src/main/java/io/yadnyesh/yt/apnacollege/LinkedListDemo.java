@@ -19,7 +19,6 @@ public class LinkedListDemo {
         Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
-            return;
         } else {
             newNode.next = head;
             head = newNode;
@@ -58,6 +57,25 @@ public class LinkedListDemo {
         }
     }
 
+    public void deleteLast() {
+        Node secondLastNode = head;
+        Node lastNode = head.next;
+
+        if (head == null) {
+            System.out.println("The list is already empty");
+            return;
+        }
+        if (head.next == null) {
+            head = null;
+            System.out.println("Deleted the only existing node, now the list is empty");
+            return;
+        }
+        while (lastNode.next != null) {
+            secondLastNode = lastNode;
+            lastNode = lastNode.next;
+        }
+        secondLastNode.next = null;
+    }
 
     public static void main(String[] args) {
         LinkedListDemo linkedList = new LinkedListDemo();
@@ -65,7 +83,7 @@ public class LinkedListDemo {
         linkedList.addLast("Two");
         linkedList.addLast("Three");
         linkedList.addFirst("Zero");
-        linkedList.deleteFirst();
+        linkedList.deleteLast();
         linkedList.printLinkedList();
     }
 }
