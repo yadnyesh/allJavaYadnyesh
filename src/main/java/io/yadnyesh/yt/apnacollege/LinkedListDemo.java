@@ -5,12 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LinkedListDemo {
     Node head = null;
+    private int size = 0;
 
     class Node {
         String data;
         Node next;
         Node(String data) {
             this.data = data;
+            size++;
             this.next = null;
         }
     }
@@ -47,6 +49,7 @@ public class LinkedListDemo {
             System.out.println(currNode.data);
             currNode = currNode.next;
         }
+        System.out.println("Size of linked list is: " + this.size);
     }
 
     public void deleteFirst(){
@@ -54,6 +57,7 @@ public class LinkedListDemo {
             System.out.println("The list is already empty");
         } else {
             head = head.next;
+            size--;
         }
     }
 
@@ -75,6 +79,7 @@ public class LinkedListDemo {
             lastNode = lastNode.next;
         }
         secondLastNode.next = null;
+        size--;
     }
 
     public static void main(String[] args) {
