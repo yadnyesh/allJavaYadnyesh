@@ -46,9 +46,10 @@ public class LinkedListDemo {
             System.out.println("List is Empty");
         }
         while(currNode != null) {
-            System.out.println(currNode.data);
+            System.out.print(currNode.data + " --> ");
             currNode = currNode.next;
         }
+        System.out.println("NULL");
         System.out.println("Size of linked list is: " + this.size);
     }
 
@@ -108,13 +109,24 @@ public class LinkedListDemo {
 
     }
 
+    public Node reverseRecursive(Node head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        Node newHead = reverseRecursive(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+
     public static void main(String[] args) {
         LinkedListDemo linkedList = new LinkedListDemo();
         linkedList.addFirst("One");
         linkedList.addLast("Two");
         linkedList.addLast("Three");
         linkedList.addLast("Four");
-        linkedList.reverseIterate();
+        linkedList.printLinkedList();
+        linkedList.head = linkedList.reverseRecursive(linkedList.head);
         linkedList.printLinkedList();
     }
 }
