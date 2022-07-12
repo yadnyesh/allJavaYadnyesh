@@ -82,13 +82,39 @@ public class LinkedListDemo {
         size--;
     }
 
+    public void reverseIterate() {
+        if(head == null) {
+            System.out.println("Linked list is empty");
+            return;
+        }
+        if(head.next == null) {
+            System.out.println("Single element linked list");
+            return;
+        }
+
+        Node prevNode = head;
+        Node currNode = head.next;
+        Node nextNode = null;
+
+        while(currNode != null) {
+            nextNode = currNode.next;
+            currNode.next = prevNode;
+
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        head.next = null;
+        head = prevNode;
+
+    }
+
     public static void main(String[] args) {
         LinkedListDemo linkedList = new LinkedListDemo();
         linkedList.addFirst("One");
         linkedList.addLast("Two");
         linkedList.addLast("Three");
-        linkedList.addFirst("Zero");
-        linkedList.deleteLast();
+        linkedList.addLast("Four");
+        linkedList.reverseIterate();
         linkedList.printLinkedList();
     }
 }
