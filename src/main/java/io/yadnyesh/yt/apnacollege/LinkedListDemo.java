@@ -50,13 +50,22 @@ public class LinkedListDemo {
         }
     }
 
+    public void deleteFirst(){
+        if (head == null) {
+            System.out.println("The list is already empty");
+        } else {
+            head = head.next;
+        }
+    }
+
 
     public static void main(String[] args) {
         LinkedListDemo linkedList = new LinkedListDemo();
-        linkedList.addFirst("Yadnyesh");
-        linkedList.addLast("Bharat");
-        linkedList.addLast("Juvekar");
-        linkedList.addFirst("Mr.");
+        linkedList.addFirst("One");
+        linkedList.addLast("Two");
+        linkedList.addLast("Three");
+        linkedList.addFirst("Zero");
+        linkedList.deleteFirst();
         linkedList.printLinkedList();
     }
 }
