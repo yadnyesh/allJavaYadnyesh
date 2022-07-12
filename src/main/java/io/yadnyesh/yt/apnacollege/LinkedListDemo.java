@@ -41,6 +41,9 @@ public class LinkedListDemo {
 
     public void printLinkedList() {
         Node currNode = head;
+        if(currNode == null) {
+            System.out.println("List is Empty");
+        }
         while(currNode != null) {
             System.out.println(currNode.data);
             currNode = currNode.next;
@@ -51,9 +54,9 @@ public class LinkedListDemo {
     public static void main(String[] args) {
         LinkedListDemo linkedList = new LinkedListDemo();
         linkedList.addFirst("Yadnyesh");
-        linkedList.addFirst("Bharat");
-        linkedList.addFirst("Juvekar");
-        linkedList.addLast("Mr.");
+        linkedList.addLast("Bharat");
+        linkedList.addLast("Juvekar");
+        linkedList.addFirst("Mr.");
         linkedList.printLinkedList();
     }
 }
