@@ -119,6 +119,26 @@ public class LinkedListDemo {
         return newHead;
     }
 
+    public void removeNthNodeFromEnd(int n) {
+       if(head == null) {
+           System.out.println("Empty linked list");
+           return;
+       }
+
+       if(head.next == null) {
+            return;
+       }
+
+       int indexToSearch = size - n;
+       Node prevNode = head;
+       int i = 1;
+       while (i < indexToSearch) {
+           prevNode = prevNode.next;
+           i++;
+       }
+       prevNode.next = prevNode.next.next;
+    }
+
     public static void main(String[] args) {
         LinkedListDemo linkedList = new LinkedListDemo();
         linkedList.addFirst("One");
@@ -127,6 +147,8 @@ public class LinkedListDemo {
         linkedList.addLast("Four");
         linkedList.printLinkedList();
         linkedList.head = linkedList.reverseRecursive(linkedList.head);
+        linkedList.printLinkedList();
+        linkedList.removeNthNodeFromEnd(2);
         linkedList.printLinkedList();
     }
 }
